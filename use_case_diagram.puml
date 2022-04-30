@@ -1,0 +1,43 @@
+@startuml
+skinparam handwritten true
+
+actor Администратор as admin
+actor "Создатель комнаты" as creator
+actor "Зритель" as viewer
+
+
+"Закрыть комнату" as (close_room)
+"Создать комнату" as (create_room)
+"Создать публичную комнату" as (create_public_room)
+"Создать секретную комнату" as (create_secret_room)
+"Выйти из комнаты" as (leave_room)
+"Войти в комнату" as (connect_to_room)
+"Управление трансляцией" as (control_stream)
+"Плей/Пауза" as (play_pause_stream)
+"Перемотка" as (rewind_stream)
+"Выставление уровня звука" as (sound_stream)
+"Управление своим потоком" as (control_own_stream)
+"Выставление уровня звука" as (sound_own_stream)
+"Включение/отключение видео/аудио" as (on_off_own_stream)
+"Отправить сообщение в чат" as (send_message)
+
+creator <|-- admin
+viewer <|-- creator
+
+(create_room) <-- (create_secret_room)
+(create_room) <-- (create_public_room)
+(control_stream) <-- (play_pause_stream)
+(control_stream) <-- (rewind_stream)
+(control_stream) <-- (sound_stream)
+(control_own_stream) <-- (sound_own_stream)
+(control_own_stream) <-- (on_off_own_stream)
+
+
+creator -- (close_room)
+creator -- (create_room)
+viewer -- (control_stream)
+viewer -- (leave_room)
+viewer -- (connect_to_room)
+viewer -- (control_own_stream)
+viewer -- (send_message)
+@enduml
